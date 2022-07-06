@@ -22,8 +22,11 @@ class MillerRabinAlgorithm {
 			}
 		}
 
-		if (MillerRabinAlgorithm.a_d_Test(q, d, p)) return true;
-		else return this.a_2i_d_Test(q, d, p, s);
+		if (MillerRabinAlgorithm.a_d_Test(q, d, p)) {
+			return true;
+		} else {
+			return this.a_2i_d_Test(q, d, p, s);
+		}
 	}
 
 	boolean findIfArrayListIsPrime(BigInteger p, ArrayList<Integer> primeNumbers) {
@@ -32,25 +35,34 @@ class MillerRabinAlgorithm {
 		for (Integer iterator : primeNumbers) {
 			checkIfPrime = BigInteger.valueOf(iterator);
 
-			if (p.mod(checkIfPrime).equals(BigInteger.ZERO)) return false;
-			if (checkIfPrime.compareTo(p.sqrt()) > 0) break;
+			if (p.mod(checkIfPrime).equals(BigInteger.ZERO)) {
+				return false;
+			}
+			if (checkIfPrime.compareTo(p.sqrt()) > 0) {
+				break;
+			}
 		}
 
 		BigInteger prime;
-		int k = 5;
-		while (k > 0) {
-			k -= 1;
+		int count = 5;
+		while (count > 0) {
+			count -= 1;
 
 			RandomIntegerGenerator randomIntegerGenerator = new RandomIntegerGenerator();
 			prime = randomIntegerGenerator.randomBigInteger(p);
-			if (!this.findIfBigNumberIsPrime(p, prime)) return false;
+			if (!this.findIfBigNumberIsPrime(p, prime)) {
+				return false;
+			}
 		}
 		return true;
 	}
 
 	private boolean a_2i_d_Test(BigInteger q, BigInteger d, BigInteger p, int s) {
-		for (int i = 0; i < s; i++)
-			if (q.modPow(BigInteger.TWO.pow(i).multiply(d), p).equals(p.subtract(BigInteger.ONE))) return true;
+		for (int i = 0; i < s; i++) {
+			if (q.modPow(BigInteger.TWO.pow(i).multiply(d), p).equals(p.subtract(BigInteger.ONE))) {
+				return true;
+			}
+		}
 		return false;
 	}
 }
